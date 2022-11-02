@@ -60,6 +60,7 @@ To get a local copy up and running follow these simple example steps.
    Click and open the html file
    ```
 5. Please run the following to render on the browser
+   ```sh
    npm start
    ```
 
