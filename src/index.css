@@ -128,3 +128,16 @@ input:focus {
   padding-left: 5px;
   border: none;
 }
+
+.edit_btn {
+  cursor: all-scroll;
+  border: none;
+  background: none;
+}
+
+.delete_btn {
+  cursor: pointer;
+  display: none;
+  border: none;
+  background: none;
+}

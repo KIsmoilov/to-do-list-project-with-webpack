@@ -1,11 +1,6 @@
 import TaskCollection from './mainClass.js';
 
 export default class Methods {
-  static addTaskToStorage = (listOfTasks) => {
-    const item = JSON.stringify(listOfTasks);
-    localStorage.setItem('storedTasksData', item);
-  };
-
   static getTaskFromStorage = () => {
     let listOfTasks;
 
@@ -15,6 +10,11 @@ export default class Methods {
       listOfTasks = JSON.parse(localStorage.getItem('storedTasksData'));
     }
     return listOfTasks;
+  };
+
+  static addTaskToStorage = (listOfTasks) => {
+    const item = JSON.stringify(listOfTasks);
+    localStorage.setItem('storedTasksData', item);
   };
 
   static newIndex = (listOfTasks) => {
@@ -65,10 +65,12 @@ export default class Methods {
       const ul = document.createElement('ul');
       ul.className = 'tasks';
       ul.innerHTML = `
-        <li><input id="${index}" type="checkbox"></li> 
-        <li><input type="text" class="text" value="${description}" readonly></li>
-        <li><button class="edit_btn" id="${index}"><i class="fa fa-ellipsis-v icon"></i></button>
-        <button class="delete_btn" id="${index}"><i class="fa fa-ellipsis-v icon"></i></button></li>
+        <li><input class="checkbox" id="CHECK${index}" type="checkbox"></li> 
+        <li><input id="TEXT${index}" type="text" class="text" value="${description}" readonly></li>
+        <li>
+        <button class="edit_btn" id="${index}"><i class="fa fa-ellipsis-v icon"></i></button>
+        <button class="delete_btn" id="${index}"><i class="fa fa-trash-can icon"></i></button>
+        </li>
       `;
       return ul;
     }
@@ -81,6 +83,8 @@ export default class Methods {
       });
 
       this.addBtnRemoveEvent();
+      this.addBtnEditEvent();
+      this.updateBtnEvent();
     };
 
     static addTasks = (description) => {
@@ -92,4 +96,51 @@ export default class Methods {
       this.addTaskToStorage(listOfTasks);
       this.showTasks();
     }
+
+    static updateBtnEvent = () => {
+      document.querySelectorAll('.text').forEach((input) => input.addEventListener('keypress', (event) => {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          const inputID = 'TEXT';
+          const selectedID = event.currentTarget.id;
+          let concatID;
+
+          if (!selectedID.includes('TEXT')) {
+            concatID = inputID.concat(selectedID);
+          } else {
+            concatID = selectedID;
+          }
+
+          document.getElementById(concatID).setAttribute('readonly', 'readonly');
+          this.updateTaskInput(document.getElementById(concatID).value, (Number(concatID.replace('TEXT', '')) - 1));
+        }
+      }));
+    }
+
+    static addBtnEditEvent = () => {
+      document.querySelectorAll('.edit_btn').forEach((button) => button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const inputID = 'TEXT';
+        const selectedID = event.currentTarget.id;
+        let concatID;
+
+        if (!selectedID.includes('TEXT')) {
+          concatID = inputID.concat(selectedID);
+        } else {
+          concatID = selectedID;
+        }
+
+        const listItem = event.target.closest('li');
+        const ulItem = event.target.closest('ul');
+
+        listItem.style.background = 'rgb(230, 230, 184)';
+        ulItem.style.background = 'rgb(230, 230, 184)';
+
+        document.getElementById(concatID).removeAttribute('readonly');
+        document.getElementById(concatID).focus();
+        document.getElementById(concatID).style.background = 'rgb(230, 230, 184)';
+        listItem.querySelector('.edit_btn').style.display = 'none';
+        listItem.querySelector('.delete_btn').style.display = 'block';
+      }));
+    };
 }
