@@ -15,7 +15,7 @@ body {
   flex-direction: column;
   width: 35%;
   height: auto;
-  margin: 300px auto auto auto;
+  margin: 20vh auto auto auto;
   background-color: rgb(246, 246, 246);
   box-shadow: 0 4px 20px 3px rgb(0, 0, 0, 0.2);
 }
@@ -94,11 +94,12 @@ i {
   list-style: none;
 }
 
-.tasks label {
-  padding-left: 10px;
+.tasks li:nth-child(2) {
+  padding-left: 0;
+  width: 100%;
 }
 
-.tasks li:nth-child(2) {
+.tasks li:nth-child(3) {
   display: flex;
   flex-direction: row;
   justify-items: flex-end;
@@ -119,4 +120,24 @@ input {
 
 input:focus {
   outline: none;
+}
+
+.text {
+  height: 45px;
+  width: 95%;
+  padding-left: 5px;
+  border: none;
+}
+
+.edit_btn {
+  cursor: all-scroll;
+  border: none;
+  background: none;
+}
+
+.delete_btn {
+  cursor: pointer;
+  display: none;
+  border: none;
+  background: none;
 }
