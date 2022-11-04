@@ -4,10 +4,10 @@
   "description": "- This is a basic website that allows users to organize their tasks. \"To-do list\" is a tool that helps to organize your day. It simply lists the things that you need to do and allows you to mark them as complete.",
   "main": "index.js",
   "scripts": {
-    "deploy": "gh-pages -d dist",
     "build": "webpack",
     "dev": "webpack --mode development",
-    "start": "webpack serve --open"
+    "start": "webpack serve --open",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/KIsmoilov/to-do-list-project-with-webpack/issues"
   },
-  "homepage": "https://github.com/KIsmoilov/ToDoList",
+  "homepage": "https://kismoilov.github.io/to-do-list-project-with-webpack/dist/",
   "dependencies": {
     "gh-pages": "^4.0.0",
     "lodash": "^4.17.21",
