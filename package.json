@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/KIsmoilov/to-do-list-project-with-webpack/issues"
   },
-  "homepage": "https://kismoilov.github.io/to-do-list-project-with-webpack/dist/",
+  "homepage": "https://kismoilov.github.io/to-do-list-project-with-webpack/dist",
   "dependencies": {
     "gh-pages": "^4.0.0",
     "lodash": "^4.17.21",
