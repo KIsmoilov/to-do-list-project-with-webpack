@@ -71,6 +71,7 @@ i {
 }
 
 #btnClear {
+  cursor: pointer;
   height: 50px;
   color: rgb(147, 147, 147);
   border-left: none;
@@ -78,6 +79,11 @@ i {
   border-right: none;
   border-top: 1px solid gray;
   font-size: 18px;
+}
+
+#btnClear:hover {
+  font-size: 19px;
+  text-decoration: underline;
 }
 
 .tasks {
@@ -127,6 +133,17 @@ input:focus {
   width: 95%;
   padding-left: 5px;
   border: none;
+  font-size: 17px;
+}
+
+.textcompleted {
+  text-decoration: line-through;
+  border: none;
+  font-size: 17px;
+  height: 45px;
+  width: 95%;
+  padding-left: 5px;
+  color: rgb(155, 155, 155);
 }
 
 .edit_btn {
@@ -140,4 +157,8 @@ input:focus {
   display: none;
   border: none;
   background: none;
+}
+
+.checkbox {
+  cursor: pointer;
 }

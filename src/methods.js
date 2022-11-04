@@ -1,6 +1,6 @@
 import TaskCollection from './mainClass.js';
 
-export default class Methods {
+export default class UtilityFunction {
   static getTaskFromStorage = () => {
     let listOfTasks;
 
@@ -61,12 +61,12 @@ export default class Methods {
       }));
     };
 
-    static listOfTasksHtml = ({ description, index }) => {
+    static listOfTasksHtml = ({ description, index }, checkboxStatus, iscompleted) => {
       const ul = document.createElement('ul');
       ul.className = 'tasks';
       ul.innerHTML = `
-        <li><input class="checkbox" id="CHECK${index}" type="checkbox"></li> 
-        <li><input id="TEXT${index}" type="text" class="text" value="${description}" readonly></li>
+        <li><input class="checkbox" id="${index}" type="checkbox" ${checkboxStatus}></li> 
+        <li><input id="TEXT${index}" type="text" class="text${iscompleted}" value="${description}" readonly></li>
         <li>
         <button class="edit_btn" id="${index}"><i class="fa fa-ellipsis-v icon"></i></button>
         <button class="delete_btn" id="${index}"><i class="fa fa-trash-can icon"></i></button>
@@ -79,12 +79,24 @@ export default class Methods {
       const listOfTasks = this.getTaskFromStorage();
       document.querySelector('.toDoTasksContainer').innerHTML = '';
       listOfTasks.forEach((item) => {
-        document.querySelector('.toDoTasksContainer').appendChild(this.listOfTasksHtml(item));
+        let checkboxStatus;
+        let iscompleted;
+        if (item.completed === true) {
+          checkboxStatus = 'checked';
+          iscompleted = 'completed';
+        } else {
+          checkboxStatus = '';
+          iscompleted = '';
+        }
+        document.querySelector('.toDoTasksContainer').appendChild(this.listOfTasksHtml(item, checkboxStatus, iscompleted));
       });
 
       this.addBtnRemoveEvent();
       this.addBtnEditEvent();
       this.updateBtnEvent();
+
+      const event = new Event('listUpdated');
+      document.dispatchEvent(event);
     };
 
     static addTasks = (description) => {
@@ -118,6 +130,7 @@ export default class Methods {
     }
 
     static addBtnEditEvent = () => {
+      let previousList = null;
       document.querySelectorAll('.edit_btn').forEach((button) => button.addEventListener('click', (event) => {
         event.preventDefault();
         const inputID = 'TEXT';
@@ -130,7 +143,12 @@ export default class Methods {
           concatID = selectedID;
         }
 
+        if (previousList !== null) {
+          previousList.getElementById(concatID).removeAttribute('readonly');
+        }
+
         const listItem = event.target.closest('li');
+        previousList = listItem;
         const ulItem = event.target.closest('ul');
 
         listItem.style.background = 'rgb(230, 230, 184)';

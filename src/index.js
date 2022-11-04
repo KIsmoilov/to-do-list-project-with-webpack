@@ -1,13 +1,23 @@
 import './index.css';
-import Methods from './methods.js';
+import UtilityFunction from './methods.js';
+import InteractiveFunction from './interactiveList.js';
 
 const inputForm = document.getElementById('inputForm');
 const addTask = document.getElementById('addTask');
 
 inputForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  Methods.addTasks(addTask.value);
+  UtilityFunction.addTasks(addTask.value);
   addTask.value = '';
 });
 
-Methods.showTasks();
+document.querySelector('.btn_clear_all').addEventListener('click', InteractiveFunction.clearAllTasksCompleted);
+
+window.addEventListener('load', () => {
+  document.addEventListener('listUpdated', () => {
+    InteractiveFunction.checkStatusEvent();
+  }, false);
+  InteractiveFunction.checkStatusEvent();
+});
+
+UtilityFunction.showTasks();
