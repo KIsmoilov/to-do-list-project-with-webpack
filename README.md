@@ -18,6 +18,8 @@
 
 - Stylelint (A mighty, modern linter that helps you avoid errors and enforce conventions in your styles).
 
+## Live Demo (if available)
+Please use the following [link](https://kismoilov.github.io/to-do-list-project-with-webpack/) to access the website: https://kismoilov.github.io/to-do-list-project-with-webpack/
 ### Linter Tests
 
 - `npx hint .`
