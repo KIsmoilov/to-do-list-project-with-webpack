@@ -7,18 +7,20 @@
     <title>To Do List</title>
 <script defer src="index.js"></script></head>
 <body>
-    <form id="toDoForm" action="#" method="post">
+    <div id="toDoForm">
         <div class="title">
             <h1>Today's To Do</h1>
             <i class="fa fa-arrows-rotate icon"></i>
         </div>
-        <div class="inputTask">
-            <input id="addTask" type="text" placeholder="Add to your list..." required>
-            <i class="fa fa-arrow-turn-down icon"></i>
-        </div>
+            <form action="" method="post" id="inputForm">
+                <div class="inputTask">
+                    <input id="addTask" name="todo" type="text" placeholder="Add to your list..." required>
+                    <i class="fa fa-arrow-turn-down icon"></i>
+                </div>
+            </form>
         <div class="toDoTasksContainer"></div>
-        <button id="btnClear" type="submit">Clear all completed</button>
-    </form>
+        <button class="btn_clear_all" id="btnClear" type="button">Clear all completed</button>
+    </div>
     <script src="../dist/main.js"></script>
 </body>
 </html>
