@@ -13,11 +13,17 @@ body {
 #toDoForm {
   display: flex;
   flex-direction: column;
-  width: 35%;
+  width: 40%;
   height: auto;
   margin: 20vh auto auto auto;
   background-color: rgb(246, 246, 246);
   box-shadow: 0 4px 20px 3px rgb(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 768px) {
+  #toDoForm {
+    width: 90%;
+  }
 }
 
 ::placeholder {
